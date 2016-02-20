@@ -1,0 +1,153 @@
+import UIKit
+import SwiftyJSON
+import Alamofire
+import Parse
+
+class SerchTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchControllerDelegate {
+@IBOutlet weak var tableView: UITableView!
+
+
+//    やること
+
+//    項目名に対し、検索可能にする
+//    →APIで取得し、辞書に格納して検索する方針とする
+//　　→やはりParseから取得する
+
+//    クリックすると次のTOP4画面へ
+//    朝の献立・昼の献立・夜の献立はスライドビューで表示する方法を考える
+
+var searchArray = [Search]()
+var filteredSearch = [Search]()
+var searchController = UISearchController(searchResultsController: nil)
+let myColor = UIColor(red: 90/255, green: 230/255, blue: 40/255, alpha: 1.0)
+var category: [String: String?] = ["": ""]
+
+override func viewDidLoad() {
+super.viewDidLoad()
+fetchCategory()
+
+// サーチコントローラ設定
+searchController.searchResultsUpdater = self
+searchController.hidesNavigationBarDuringPresentation = false
+searchController.dimsBackgroundDuringPresentation = false
+searchController.searchBar.searchBarStyle = UISearchBarStyle.Prominent
+searchController.searchBar.sizeToFit()
+searchController.searchBar.tintColor = myColor
+searchController.searchBar.barTintColor = UIColor.whiteColor()
+searchController.searchBar.backgroundColor = UIColor.redColor()
+tableView.tableHeaderView = searchController.searchBar
+
+self.searchArray += [Search(categoryName: "朝の献立")]
+self.searchArray += [Search(categoryName: "昼")]
+self.searchArray += [Search(categoryName: "夕方")]
+
+tableView.dataSource = self
+tableView.delegate = self
+self.tableView.reloadData()
+
+}
+
+//Parse上のカテゴリ情報取得
+func fetchCategory(){
+UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+var category: [String: String?] = ["":""]
+let queryInfo = PFQuery(className: "Category")
+queryInfo.findObjectsInBackgroundWithBlock { (objects, error) in
+if error == nil {
+for object in objects! {
+var searchword = self.searchController.searchBar.text
+var exist = object["categoryName"] as! String
+if (exist.rangeOfString(searchword!) != nil) {
+category = [
+"name": object["categoryName"] as! String,
+"url": object["categoryUrl"] as! String
+]
+UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+}
+}
+}
+}
+}
+
+//tableview設定
+func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+return 1
+}
+
+func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+return searchController.active ? filteredSearch.count : searchArray.count
+}
+
+func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+let cell = self.tableView.dequeueReusableCellWithIdentifier("searchcell")! as UITableViewCell
+var search: Search
+if (tableView == self.searchDisplayController?.searchResultsTableView)
+{
+search = self.filteredSearch[indexPath.row]
+}else{
+search = self.searchArray[indexPath.row]
+}
+//cell.textLabel?.text = search.categoryName
+return cell
+}
+
+func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+tableView.deselectRowAtIndexPath(indexPath, animated: true)
+var search: Search
+if (tableView == self.searchDisplayController?.searchResultsTableView)
+{
+search = self.filteredSearch[indexPath.row]
+}else{
+search = self.searchArray[indexPath.row]
+}
+print(search)
+}
+
+//検索機能
+func filterContentForSearchText(searchText: String, scope: String = "Title")
+{
+self.filteredSearch = self.filteredSearch.filter({(search: Search) -> Bool in
+var categoryMatch = (scope == "Title")
+var stringMatch = search.categoryName.rangeOfString(searchText)
+
+return categoryMatch && (stringMatch != nil)
+})
+}
+
+func searchController(controller: UISearchController, shouldReloadTableForSearchString searchString: String?) -> Bool {
+self.filterContentForSearchText(searchString!, scope: "Title")
+return true
+}
+
+func searchController(controller: UISearchController, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
+self.filterContentForSearchText(self.searchController.searchBar.text!, scope: "Title")
+return true
+}
+
+//セルの高さ
+func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+return CGFloat(40)
+}
+
+
+override func didReceiveMemoryWarning() {
+super.didReceiveMemoryWarning()
+}
+
+}
+
+//既存Search機能の拡張
+extension SerchTableViewController: UISearchResultsUpdating {
+func updateSearchResultsForSearchController(searchController: UISearchController) {
+let options: NSStringCompareOptions = [NSStringCompareOptions.CaseInsensitiveSearch, NSStringCompareOptions.WidthInsensitiveSearch]
+let text = searchController.searchBar.text!
+
+filteredSearch = searchArray.filter() { Search in
+let string = "\(Search.categoryName)"
+return string.rangeOfString(text, options: options) != nil
+}
+tableView.reloadData()
+}
+}
+
+

@@ -1,0 +1,80 @@
+//
+//  SerchTableViewController.swift
+//  RecipeRecommend
+//
+import UIKit
+import SwiftyJSON
+import Alamofire
+import Parse
+
+class SerchTableViewController: UIViewController {
+
+//    やること
+//    楽天API項目名を一括取得・表示する
+//    →項目名のみはParsに入れておくか？
+//    項目名はParseに入れておく
+//    項目すべては表示しておかないようにする
+
+//    朝の献立・昼の献立・夜の献立は上位に表示
+//    項目名に対し、検索可能にする
+//    クリックすると次のTOP4画面へ
+
+var category: [String: String?] = ["": ""]
+
+override func viewDidLoad() {
+super.viewDidLoad()
+getCategory()
+}
+
+override func didReceiveMemoryWarning() {
+super.didReceiveMemoryWarning()
+}
+
+//tableview設定
+func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+return 1
+}
+
+
+//APIからカテゴリ取得し、突合する
+func searchCategory(){
+UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+Alamofire.request(.GET, "https://app.rakuten.co.jp/services/api/Recipe/CategoryList/20121121?format=json&applicationId=1059767517344748188")
+.responseJSON{ response in
+guard let object = response.result.value else{
+return
+}
+let json = JSON(object)
+json["result"]["large"].forEach{(i, json) in
+self.category = [
+"name": json["categoryName"].string,
+"url": json["categoryUrl"].string
+]
+print(self.category)
+}
+json["result"]["medium"].forEach{(i, json) in
+self.category = [
+"name": json["categoryName"].string,
+"url": json["categoryUrl"].string
+]
+print(self.category)
+}
+json["result"]["small"].forEach{(i, json) in
+self.category = [
+"name": json["categoryName"].string,
+"url": json["categoryUrl"].string
+]
+print(self.category)
+}
+UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+}
+}
+
+//Parseへ項目一覧を保存
+func SaveCategory(){
+let savecategory = Category(categoryName: self.category["categoryName"]!!, categoryUrl: self.category["categoryUrl"]!!)
+savecategory.save()
+}
+}
+
+

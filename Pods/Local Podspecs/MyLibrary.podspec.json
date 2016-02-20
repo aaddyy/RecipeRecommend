@@ -1,0 +1,16 @@
+{
+  "name": "MyLibrary",
+  "version": "0.0.1",
+  "summary": "This is my sample library for iOS.",
+  "homepage": "https://github.com/kwakata/MyLibrary/",
+  "authors": {
+    "kwakata": "kwakata@sonix.asia"
+  },
+  "source": {
+    "git": "https://github.com/kwakata/MyLibrary.git",
+    "tag": "0.0.1"
+  },
+  "source_files": "MyLibrary/Classes",
+  "exclude_files": "Classes/Exclude",
+  "license": "MIT"
+}
