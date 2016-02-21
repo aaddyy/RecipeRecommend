@@ -421,7 +421,7 @@
 				TargetAttributes = {
 					8C2EA3721C6868EB0079533C = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = F3S5QF8J29;
+						DevelopmentTeam = KH3EZJF52D;
 					};
 					8C2EA3861C6868EB0079533C = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -702,6 +702,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: SHINYA ADAKA (KH3EZJF52D)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -717,6 +718,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "8307e9f0-a258-47ad-9689-957dff753e6c";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -728,6 +730,8 @@
 			baseConfigurationReference = D278A8862B94E3E9D039E97B /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
@@ -737,6 +741,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.aaddyy.RecipeRecommend.PaPad;
 				PRODUCT_NAME = PaPad;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -745,6 +750,8 @@
 			baseConfigurationReference = A21731715ABECEE2CDA23DA9 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
@@ -754,6 +761,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.aaddyy.RecipeRecommend.PaPad;
 				PRODUCT_NAME = PaPad;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
