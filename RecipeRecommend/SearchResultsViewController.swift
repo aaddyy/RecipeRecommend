@@ -12,6 +12,7 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
     var Url: String!
     var Name: String!
     let currentFlag = 2
+    var Flag = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,12 +91,14 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
         costLabel.sizeToFit()
         
         //画像の処理
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         let url = NSURL(string: menu["foodimageurl"]!!)
         let req = NSURLRequest(URL:url!)
         NSURLConnection.sendAsynchronousRequest(req, queue:NSOperationQueue.mainQueue()){(res, data, err) in
             let image = UIImage(data:data!)
             let menuImage = cell.viewWithTag(5) as! UIImageView
             menuImage.image = image
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         }
         return cell
     }
@@ -104,6 +107,7 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.currentUrl = self.menus[indexPath.row]["recipeUrl"]!!
         self.currentMenu = self.menus[indexPath.row]
+        Flag = 0
         self.performSegueWithIdentifier("ShowToSearchWebViewController", sender: nil)
     }
     override func prepareForSegue(segue: UIStoryboardSegue,  sender: AnyObject?) {
@@ -114,6 +118,16 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
             menuweb.Url = self.currentUrl
             menuweb.Menu = self.currentMenu
             menuweb.flag = self.currentFlag
+        }
+    }
+    
+    //タブ遷移する際、一つ前の画面に戻っておく
+    override func viewWillDisappear(animated: Bool) {
+        if Flag == 1{
+            self.navigationController?.popViewControllerAnimated(true)
+            Flag = 0
+        }else{
+            Flag = 0
         }
     }
     

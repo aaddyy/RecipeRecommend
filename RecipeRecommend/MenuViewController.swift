@@ -32,8 +32,6 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     override func viewWillAppear(animated: Bool) {
-        LogoutButtonSetting()
-        
         if PFUser.currentUser() == nil {
             performSegueWithIdentifier("modalLoginViewController", sender: self)
         }
@@ -106,12 +104,14 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         costLabel.sizeToFit()
         
         //画像の処理
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         let url = NSURL(string: menu["foodimageurl"]!!)
         let req = NSURLRequest(URL:url!)
         NSURLConnection.sendAsynchronousRequest(req, queue:NSOperationQueue.mainQueue()){(res, data, err) in
             let image = UIImage(data:data!)
             let menuImage = cell.viewWithTag(5) as! UIImageView
             menuImage.image = image
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         }
         return cell
     }
@@ -131,53 +131,6 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
             menuweb.Menu = self.currentMenu
         }
     }
-
-//ログアウト機能
-    //ログアウトボタンの設定
-    func LogoutButtonSetting(){
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Logout.png"), style: .Plain, target: self, action: "logout")
-            //画面の向き変化を探知
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "onOrientationChange:", name: UIDeviceOrientationDidChangeNotification, object: nil)
-    }
-    
-    // 端末の向きがかわったら呼び出される.
-    func onOrientationChange(notification: NSNotification){
-        
-        // 現在のデバイスの向きを取得.
-        let deviceOrientation: UIDeviceOrientation!  = UIDevice.currentDevice().orientation
-        
-        // 向きの判定.
-        if UIDeviceOrientationIsLandscape(deviceOrientation) {
-            //横向きの判定
-            let LogoutButton = UIBarButtonItem(image: UIImage(named: "Logoutsmall.png"), style: .Plain, target: self, action: "logout")
-            navigationItem.rightBarButtonItem = LogoutButton
-        } else if UIDeviceOrientationIsPortrait(deviceOrientation){
-            //縦向きの判定
-            let LogoutButton = UIBarButtonItem(image: UIImage(named: "Logout.png"), style: .Plain, target: self, action: "logout")
-            navigationItem.rightBarButtonItem = LogoutButton
-        }
-    }
-    
-    func logout() {
-        let alertController = UIAlertController(title: "ログアウトしますか？", message: "", preferredStyle: .Alert)
-        let logoutAction = UIAlertAction(title: "ログアウト", style: .Default,
-            handler:{ (action:UIAlertAction!) -> Void in
-            self.execution()
-            })
-        let cancelAction = UIAlertAction(title: "キャンセル", style: .Default,
-            handler:{ (action:UIAlertAction!) -> Void in
-            self.dismissViewControllerAnimated(true, completion: nil)
-        })
-            alertController.addAction(logoutAction)
-            alertController.addAction(cancelAction)
-            presentViewController(alertController, animated: true, completion: nil)
-        }
-    
-    func execution(){
-        PFUser.logOut()
-        performSegueWithIdentifier("modalLoginViewController", sender: self)
-    }
-//
     
     //タブボタンの設定
     func setTabButton(x: CGFloat, text: String, color: UIColor, tag: Int){
@@ -223,7 +176,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
     }
 //
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

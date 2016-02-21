@@ -134,14 +134,23 @@ class MenuWebViewController: UIViewController, UIScrollViewDelegate, WKNavigatio
     }
     
     //タブ遷移する際、一つ前の画面に戻っておく
-    override func viewWillDisappear(animated: Bool) {
+    override func viewDidDisappear(animated: Bool) {
         if flag == 2{
+            self.navigationController?.popToViewController(navigationController!.viewControllers[0], animated: true)
             flag = 0
         }else{
             self.navigationController?.popViewControllerAnimated(true)
             flag = 0
         }
     }
+    
+    override func willMoveToParentViewController(parent: UIViewController?) {
+        if parent == nil {
+            flag = 0
+        }
+    }
+    //
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

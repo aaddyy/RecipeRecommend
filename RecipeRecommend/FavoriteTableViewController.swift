@@ -20,6 +20,7 @@ class FavoriteTableViewController: UIViewController,  UITableViewDataSource,  UI
         self.tableView.reloadData()
         LogoutButtonSetting()
         DeleteButtonSetting()
+        setEditing(false, animated: true)
     }
     
     //Parseから取得
@@ -82,12 +83,14 @@ class FavoriteTableViewController: UIViewController,  UITableViewDataSource,  UI
         costLabel.sizeToFit()
         
         //画像の処理
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         let url = NSURL(string: favorit["foodimageurl"]!!)
         let req = NSURLRequest(URL:url!)
         NSURLConnection.sendAsynchronousRequest(req, queue:NSOperationQueue.mainQueue()){(res, data, err) in
             let image = UIImage(data:data!)
             let menuImage = cell.viewWithTag(5) as! UIImageView
             menuImage.image = image
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         }
         return cell
     }
@@ -164,6 +167,7 @@ class FavoriteTableViewController: UIViewController,  UITableViewDataSource,  UI
     override func setEditing(editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         tableView.editing = editing
+        tableView.editing.description
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -175,21 +179,22 @@ class FavoriteTableViewController: UIViewController,  UITableViewDataSource,  UI
                     queryInfo.includeKey("user")
                     queryInfo.findObjectsInBackgroundWithBlock { (objects, error) in
                         if error == nil {
+                            var temp = -1
                             for object in objects! {
-                                let USER = object["user"].objectId
+                                let USER = object["user"] .objectId
                                 let currentuser = PFUser.currentUser()!.objectId
                                 if USER == currentuser {
                                     let URL = object["recipeUrl"] as! String
                                     let currentUrl = self.favorits[indexPath.row]["recipeUrl"]!!
                                     if URL == currentUrl {
                                         object.deleteInBackground()
-//                                        var isCompleted = object.deleteInBackground().completed
-//                                        print(isCompleted)
-                                        self.tableView.reloadData()
+                                        temp = indexPath.row
                                         }
                                     }
-                                self.tableView.reloadData()
                                 }
+                            self.favorits.removeAtIndex(temp)
+                            self.tableView.reloadData()
+                            self.setEditing(false, animated: true)
                             }
                     }
                 })
@@ -206,14 +211,14 @@ class FavoriteTableViewController: UIViewController,  UITableViewDataSource,  UI
     self.tableView.reloadData()
     }
     
-    func tableView(tableView: UITableView, didEndEditingRowAtIndexPath indexPath: NSIndexPath) {
-        print("didEndEditing")
-    }
-    
     func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
         let temp = "削除"
         return temp
     }
+    
+    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle { if tableView.editing {
+        return UITableViewCellEditingStyle.Delete }
+    else { return UITableViewCellEditingStyle.None } }
     //
     
     override func didReceiveMemoryWarning() {

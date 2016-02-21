@@ -31,7 +31,6 @@ class SearchTableViewController: UIViewController, UITableViewDelegate, UITableV
         tableView.dataSource = self
         tableView.delegate = self
         self.tableView.reloadData()
-        LogoutButtonSetting()
         
         var tap = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
         self.view.addGestureRecognizer(tap)
@@ -64,11 +63,12 @@ class SearchTableViewController: UIViewController, UITableViewDelegate, UITableV
                         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
                         let exist = object["categoryName"] as! String
                         var check = 0
+                        
                             for (var i=0; i < count; i++){
                                 if (exist.rangeOfString(tempArray[i] as! String) != nil){
                                     check++
+                                    }
                                 }
-                        }
                                 if (check == count){
                                     var temp: [String: String?] = [
                                         "name": object["categoryName"]! as! String,
@@ -77,10 +77,10 @@ class SearchTableViewController: UIViewController, UITableViewDelegate, UITableV
                                     self.Category.append(temp)
                                     self.tableView.reloadData()
                                     UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                                    }
                                 }
                             }
                         }
-                    }
                 }
             self.tableView.reloadData()
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
@@ -94,6 +94,7 @@ class SearchTableViewController: UIViewController, UITableViewDelegate, UITableV
             let searchResults = cast as! SearchResultsViewController
             searchResults.Url = self.currentUrl
             searchResults.Name = self.currentName
+            searchResults.Flag = 1
         }
     }
     
@@ -119,7 +120,6 @@ class SearchTableViewController: UIViewController, UITableViewDelegate, UITableV
     }
 //
     
-    
 //tableview設定
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -140,54 +140,8 @@ class SearchTableViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return CGFloat(40)
     }
-    
-//ログアウト機能
-    //ログアウトボタンの設定
-    func LogoutButtonSetting(){
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Logout.png"), style: .Plain, target: self, action: "logout")
-        //画面の向き変化を探知
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onOrientationChange:", name: UIDeviceOrientationDidChangeNotification, object: nil)
-    }
-    
-    // 端末の向きがかわったら呼び出される.
-    func onOrientationChange(notification: NSNotification){
-        
-        // 現在のデバイスの向きを取得.
-        var deviceOrientation: UIDeviceOrientation!  = UIDevice.currentDevice().orientation
-        
-        // 向きの判定.
-        if UIDeviceOrientationIsLandscape(deviceOrientation) {
-            //横向きの判定
-            var LogoutButton = UIBarButtonItem(image: UIImage(named: "Logoutsmall.png"), style: .Plain, target: self, action: "logout")
-            navigationItem.rightBarButtonItem = LogoutButton
-        } else if UIDeviceOrientationIsPortrait(deviceOrientation){
-            //縦向きの判定
-            var LogoutButton = UIBarButtonItem(image: UIImage(named: "Logout.png"), style: .Plain, target: self, action: "logout")
-            navigationItem.rightBarButtonItem = LogoutButton
-        }
-    }
-    
-    func logout() {
-        let alertController = UIAlertController(title: "ログアウトしますか？", message: "", preferredStyle: .Alert)
-        let logoutAction = UIAlertAction(title: "ログアウト", style: .Default,
-            handler:{ (action:UIAlertAction!) -> Void in
-                self.execution()
-        })
-        let cancelAction = UIAlertAction(title: "キャンセル", style: .Default,
-            handler:{ (action:UIAlertAction!) -> Void in
-                self.dismissViewControllerAnimated(true, completion: nil)
-        })
-        alertController.addAction(logoutAction)
-        alertController.addAction(cancelAction)
-        presentViewController(alertController, animated: true, completion: nil)
-    }
-    
-    func execution(){
-        PFUser.logOut()
-        performSegueWithIdentifier("ModalLoginViewController", sender: self)
-    }
 //
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

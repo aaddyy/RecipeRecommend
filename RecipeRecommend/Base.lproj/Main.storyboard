@@ -241,13 +241,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nh0-r0-IiO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2428.5" y="171.5"/>
+            <point key="canvasLocation" x="2427.5" y="171.5"/>
         </scene>
         <!--Navigation Bar Controller-->
         <scene sceneID="ciy-gf-uL1">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nmY-VK-a9G" customClass="NavigationBarController" customModule="PaPad" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="mostViewed" id="Jgd-N3-5nm"/>
+                    <tabBarItem key="tabBarItem" tag="1" systemItem="mostViewed" id="Jgd-N3-5nm"/>
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="9Yi-SV-yse">
