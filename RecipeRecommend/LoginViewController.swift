@@ -4,11 +4,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var backImage: UIImageView!
+    @IBOutlet weak var SignUpButton: UIButton!
+    @IBOutlet weak var Cancel: UIButton!
+    var TABControl = TabBarController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         nameTextField.delegate = self
         passwordTextField.delegate = self
+        SignUpButton.titleLabel?.numberOfLines = 3
+        SignUpButton.titleLabel?.textAlignment = NSTextAlignment.Center
+        Cancel.titleLabel?.numberOfLines = 3
+        Cancel.titleLabel?.textAlignment = NSTextAlignment.Center
+        
         shouldAutorotate()
     }
     
@@ -49,6 +57,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 }else{
                     self.showNotice("ユーザーが登録されました")
                     self.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+                    self.TABControl.viewWillAppear(false)
                     }
                 }
             }
@@ -65,8 +74,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             } else{
                 self.showNotice("ログイン成功")
                 self.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+                self.TABControl.viewWillAppear(false)
             }
         }
+    }
+    
+    @IBAction func tapCancel(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+        self.TABControl.viewWillAppear(false)
     }
     
     //アラートを表示させるメソッドを定義

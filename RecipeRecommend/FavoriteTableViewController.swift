@@ -12,15 +12,17 @@ class FavoriteTableViewController: UIViewController,  UITableViewDataSource,  UI
         super.viewDidLoad()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewDidAppear(animated: Bool) {
         favorits = []
-        self.fetchFavorits()
         tableView.dataSource = self
         tableView.delegate = self
-        self.tableView.reloadData()
+        setEditing(false, animated: true)
+        if PFUser.currentUser() != nil {
+        self.fetchFavorits()
         LogoutButtonSetting()
         DeleteButtonSetting()
-        setEditing(false, animated: true)
+        }
+        self.tableView.reloadData()
     }
     
     //Parseから取得

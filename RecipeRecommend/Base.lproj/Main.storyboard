@@ -143,7 +143,6 @@
                     <connections>
                         <outlet property="forTab" destination="VT2-UC-NXt" id="xYA-F3-nGj"/>
                         <outlet property="tableView" destination="N2i-hx-zHI" id="pLH-UW-ufG"/>
-                        <segue destination="PJL-xO-WLN" kind="presentation" identifier="modalLoginViewController" id="Bpe-ll-Y1u"/>
                         <segue destination="wwc-pB-OAz" kind="show" identifier="ShowToMenuWebViewController" id="OYn-o7-h1a"/>
                     </connections>
                 </viewController>
@@ -151,7 +150,7 @@
             </objects>
             <point key="canvasLocation" x="1502.5" y="171.5"/>
         </scene>
-        <!--アカウントログイン-->
+        <!--ユーザー登録 / ログイン-->
         <scene sceneID="i0I-gy-6H3">
             <objects>
                 <viewController id="BiE-mt-pYd" customClass="LoginViewController" customModule="PaPad" customModuleProvider="target" sceneMemberID="viewController">
@@ -167,26 +166,28 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qnq-PK-KGh">
-                                <rect key="frame" x="26" y="60" width="323" height="30"/>
+                                <rect key="frame" x="38" y="60" width="300" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="ACo-ee-f30"/>
+                                    <constraint firstAttribute="width" constant="300" id="Nmr-4H-agH"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0WS-CP-nw2">
-                                <rect key="frame" x="26" y="110" width="323" height="30"/>
+                                <rect key="frame" x="38" y="110" width="300" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="BBQ-4w-Tkl"/>
+                                    <constraint firstAttribute="width" constant="300" id="HKt-eo-ZOG"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qru-Xz-9gy">
-                                <rect key="frame" x="36" y="180" width="110" height="40"/>
+                                <rect key="frame" x="148" y="180" width="80" height="40"/>
                                 <color key="backgroundColor" red="0.27450980392156865" green="0.82352941176470584" blue="0.078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="110" id="AKh-JN-jbn"/>
+                                    <constraint firstAttribute="width" constant="80" id="AKh-JN-jbn"/>
                                     <constraint firstAttribute="height" constant="40" id="vPV-O1-DVW"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="15"/>
@@ -199,31 +200,50 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pq2-Bb-fg9">
-                                <rect key="frame" x="229" y="180" width="110" height="40"/>
+                                <rect key="frame" x="48" y="180" width="80" height="40"/>
                                 <color key="backgroundColor" red="0.27450980392156865" green="0.82352941176470584" blue="0.078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="110" id="YvF-tY-4g8"/>
+                                    <constraint firstAttribute="width" constant="80" id="YvF-tY-4g8"/>
                                     <constraint firstAttribute="height" constant="40" id="wlV-OZ-C2H"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="15"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="アカウント作成"/>
+                                <state key="normal">
+                                    <string key="title">ユーザー
+登録</string>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="tapSignUpButton:" destination="BiE-mt-pYd" eventType="touchUpInside" id="Ijf-T9-Qr7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zVs-Dm-Gst">
+                                <rect key="frame" x="248" y="180" width="80" height="40"/>
+                                <color key="backgroundColor" red="0.27450980390000002" green="0.82352941180000006" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="M0j-6l-yvH"/>
+                                    <constraint firstAttribute="height" constant="40" id="OB0-mo-M6t"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="15"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="キャンセル"/>
+                                <connections>
+                                    <action selector="tapCancel:" destination="BiE-mt-pYd" eventType="touchUpInside" id="Ny9-om-ovg"/>
+                                    <action selector="tapSignUpButton:" destination="BiE-mt-pYd" eventType="touchUpInside" id="yzg-HW-iMo"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Qnq-PK-KGh" firstAttribute="leading" secondItem="CV2-E9-0JI" secondAttribute="leadingMargin" constant="10" id="13e-Os-AXb"/>
+                            <constraint firstItem="0WS-CP-nw2" firstAttribute="centerX" secondItem="CV2-E9-0JI" secondAttribute="centerX" id="3O6-22-Zd3"/>
+                            <constraint firstItem="Qnq-PK-KGh" firstAttribute="centerX" secondItem="CV2-E9-0JI" secondAttribute="centerX" id="85i-B7-kJ6"/>
                             <constraint firstItem="0WS-CP-nw2" firstAttribute="top" secondItem="Qnq-PK-KGh" secondAttribute="bottom" constant="20" id="884-Kp-iy2"/>
+                            <constraint firstItem="qru-Xz-9gy" firstAttribute="centerX" secondItem="CV2-E9-0JI" secondAttribute="centerX" id="8NA-5Z-Yrm"/>
                             <constraint firstItem="81j-n6-T8o" firstAttribute="leading" secondItem="CV2-E9-0JI" secondAttribute="leading" id="8R5-XI-4Tp"/>
+                            <constraint firstItem="qru-Xz-9gy" firstAttribute="leading" secondItem="Pq2-Bb-fg9" secondAttribute="trailing" constant="20" id="9bo-1G-1sR"/>
+                            <constraint firstItem="zVs-Dm-Gst" firstAttribute="leading" secondItem="qru-Xz-9gy" secondAttribute="trailing" constant="20" id="Ldc-hW-bSY"/>
                             <constraint firstItem="pwf-fM-3WP" firstAttribute="top" secondItem="81j-n6-T8o" secondAttribute="bottom" id="LvK-HE-edb"/>
-                            <constraint firstItem="qru-Xz-9gy" firstAttribute="leading" secondItem="CV2-E9-0JI" secondAttribute="leadingMargin" constant="20" id="OYW-xd-YRG"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Pq2-Bb-fg9" secondAttribute="trailing" constant="20" id="UQX-cn-dJ7"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Qnq-PK-KGh" secondAttribute="trailing" constant="10" id="YN6-2d-CEa"/>
-                            <constraint firstItem="0WS-CP-nw2" firstAttribute="leading" secondItem="CV2-E9-0JI" secondAttribute="leadingMargin" constant="10" id="oAL-hI-SjF"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="0WS-CP-nw2" secondAttribute="trailing" constant="10" id="oNG-MX-WKj"/>
+                            <constraint firstItem="zVs-Dm-Gst" firstAttribute="top" secondItem="0WS-CP-nw2" secondAttribute="bottom" constant="40" id="olh-k9-ZLu"/>
                             <constraint firstItem="qru-Xz-9gy" firstAttribute="top" secondItem="0WS-CP-nw2" secondAttribute="bottom" constant="40" id="p7n-Wq-9gw"/>
                             <constraint firstItem="81j-n6-T8o" firstAttribute="top" secondItem="Sj2-3w-sp2" secondAttribute="bottom" id="qcy-qA-RwE"/>
                             <constraint firstItem="Qnq-PK-KGh" firstAttribute="top" secondItem="Sj2-3w-sp2" secondAttribute="bottom" constant="60" id="v16-mz-x6C"/>
@@ -231,9 +251,11 @@
                             <constraint firstAttribute="trailing" secondItem="81j-n6-T8o" secondAttribute="trailing" id="ymd-me-Xs2"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="アカウントログイン" id="7J9-5Q-T0u"/>
+                    <navigationItem key="navigationItem" title="ユーザー登録 / ログイン" id="7J9-5Q-T0u"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="Cancel" destination="zVs-Dm-Gst" id="PA8-ny-fci"/>
+                        <outlet property="SignUpButton" destination="Pq2-Bb-fg9" id="xdf-Bv-Nol"/>
                         <outlet property="backImage" destination="81j-n6-T8o" id="7sL-fa-jh4"/>
                         <outlet property="nameTextField" destination="Qnq-PK-KGh" id="xdc-5c-RqZ"/>
                         <outlet property="passwordTextField" destination="0WS-CP-nw2" id="sFc-JB-ddA"/>
@@ -299,6 +321,9 @@
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <segue destination="PJL-xO-WLN" kind="presentation" identifier="MODALLoginViewController" id="eJ9-eX-zXP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ycp-he-bK2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -308,9 +333,7 @@
         <scene sceneID="sEd-li-diL">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EHR-mI-kmR" customClass="NavigationBarController" customModule="PaPad" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="Z0S-EV-8Ab">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" tag="3" systemItem="favorites" id="Z0S-EV-8Ab"/>
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="xo6-Pi-Cz9">
@@ -341,6 +364,7 @@
                         <segue destination="nmY-VK-a9G" kind="relationship" relationship="viewControllers" id="zz4-8E-9lp"/>
                         <segue destination="oi0-Na-r4q" kind="relationship" relationship="viewControllers" id="fi8-Ed-SfO"/>
                         <segue destination="EHR-mI-kmR" kind="relationship" relationship="viewControllers" id="B5f-wG-ZoZ"/>
+                        <segue destination="PJL-xO-WLN" kind="presentation" identifier="ModalLoginViewController" id="U34-71-ys1"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hAg-Rd-bbK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -681,7 +705,6 @@
                         <outlet property="searchBar" destination="pv7-KU-JjA" id="9eA-Vt-X7L"/>
                         <outlet property="tableView" destination="nvr-iN-JN2" id="0kv-km-eLN"/>
                         <segue destination="dEU-a3-gnj" kind="show" identifier="ShowToSearchResults" id="Xgp-EQ-vqG"/>
-                        <segue destination="PJL-xO-WLN" kind="presentation" identifier="ModalLoginViewController" id="AR7-Is-pim"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VCZ-zs-VPY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -692,7 +715,7 @@
         <scene sceneID="est-Hf-lpo">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oi0-Na-r4q" customClass="NavigationBarController" customModule="PaPad" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="search" id="HbK-so-FqL"/>
+                    <tabBarItem key="tabBarItem" tag="2" systemItem="search" id="HbK-so-FqL"/>
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="CqK-zx-eKs">
@@ -711,7 +734,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Bpe-ll-Y1u"/>
-        <segue reference="OYn-o7-h1a"/>
+        <segue reference="U34-71-ys1"/>
+        <segue reference="opf-xr-Qmn"/>
     </inferredMetricsTieBreakers>
 </document>

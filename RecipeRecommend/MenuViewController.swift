@@ -17,28 +17,23 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
         //siteButton
         setTabButton(self.view.center.x*2/5-20, text: "人気", color: titlecolor, tag: 0)
         setTabButton(self.view.center.x*4/5-20, text: "朝", color: titlecolor, tag: 1)
         setTabButton(self.view.center.x*6/5-20, text: "昼", color: titlecolor, tag: 2)
         setTabButton(self.view.center.x*8/5-20, text: "夜", color: titlecolor, tag: 3)
-        //人気のボタンを選択状態にする
-        setSelectedButton(tabButtons[0], selected: true)
-        
-        getMenus(IdforUrl[0])
-        tableView.dataSource = self
-        tableView.delegate = self
     }
     
     override func viewWillAppear(animated: Bool) {
-        if PFUser.currentUser() == nil {
-            performSegueWithIdentifier("modalLoginViewController", sender: self)
-        }
+        //人気のボタンを選択状態にする
+        tapTabButton(tabButtons[0])
+        
+        //menus = []
+        //getMenus(IdforUrl[0])
+        tableView.dataSource = self
+        tableView.delegate = self
     }
 
-    //
-    
     //APIから情報取得
     func getMenus(Id: String){
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true

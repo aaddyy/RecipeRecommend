@@ -29,7 +29,11 @@ class MenuWebViewController: UIViewController, UIScrollViewDelegate, WKNavigatio
     }
     
     override func viewWillAppear(animated: Bool) {
-        Check()
+        if PFUser.currentUser() != nil {
+            Check()
+        }else{
+            self.favoriteButtonSetting()
+        }
     }
     
 //お気に入りボタンの設定
@@ -69,7 +73,9 @@ class MenuWebViewController: UIViewController, UIScrollViewDelegate, WKNavigatio
     
     //お気に入り登録。Parseへ保存
     func favorite(){
-        if (check == 1) {
+        if PFUser.currentUser() == nil {
+            consent()
+        }else if (check == 1) {
             self.showAlert("既にお気に入り登録済みです")
         }else if (check == 0){
             let menumanager = MenuManager(recipeTitle: self.Menu["title"]!!, recipeUrl: self.Menu["recipeUrl"]!!, foodImageUrl: self.Menu["foodimageurl"]!!, recipeDescription: self.Menu["description"]!!, recipeIndication: self.Menu["time"]!!, recipeCost: self.Menu["cost"]!!)
@@ -111,6 +117,27 @@ class MenuWebViewController: UIViewController, UIScrollViewDelegate, WKNavigatio
             }
             self.favoriteButtonSetting()
         }
+    }
+    //
+    
+    //ログイン状態でない場合、favorite押下で呼び出す
+    func consent() {
+        let alertController = UIAlertController(title: "お気に入り機能を使用するにはユーザー登録が必要です。\n登録が可能な場合は、「ユーザー登録」へ進んで下さい。", message: "", preferredStyle: .Alert)
+        let signUpAction = UIAlertAction(title: "ユーザー登録", style: .Default,
+            handler:{ (action:UIAlertAction!) -> Void in
+                self.execution()
+        })
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .Default,
+            handler:{ (action:UIAlertAction!) -> Void in
+                self.dismissViewControllerAnimated(true, completion: nil)
+        })
+        alertController.addAction(signUpAction)
+        alertController.addAction(cancelAction)
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func execution(){
+        performSegueWithIdentifier("MODALLoginViewController", sender: self)
     }
     //
     
