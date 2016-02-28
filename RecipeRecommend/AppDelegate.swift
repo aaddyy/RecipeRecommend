@@ -38,7 +38,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        //インターネット接続確認
+        if CheckReachability("google.com") {
+        } else {
+            let alertController = UIAlertController(title: "インターネット接続エラー", message: "本アプリは\nインターネットに接続した状態で\nご使用下さい", preferredStyle: .Alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(defaultAction)
+            self.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
+        }
+        //
     }
 
     func applicationWillTerminate(application: UIApplication) {

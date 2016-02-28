@@ -37,21 +37,13 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
                 let json = JSON(object)
                 json["result"].forEach{(i, json) in
                     let menu: [String: String?] = [
-                        //                        "id": json["recipeId"].string,
                         "title": json["recipeTitle"].string,
                         "recipeUrl": json["recipeUrl"].string,
                         "foodimageurl": json["foodImageUrl"].string,
-                        //                        "mediumimageurl": json["mediumImageUrl"].string,
-                        //                        "smallimageurl": json["smallImageUrl"].string,
-                        //                        "pickup": json["pickup"].string,
-                        //                        "shop": json["shop"].string,
-                        //                        "nickname": json["nickname"].string,
                         "description": json["recipeDescription"].string,
-                        //                        "material": json["recipeMaterial"].string,
                         "time": json["recipeIndication"].string,
                         "cost": json["recipeCost"].string,
-                        //                        "publishday": json["recipePublishday"].string,
-                        //                        "rank": json["rank"].string
+                        "rank": json["rank"].string
                     ]
                     self.menus.append(menu)
                 }

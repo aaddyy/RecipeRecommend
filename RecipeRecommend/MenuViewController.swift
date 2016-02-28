@@ -25,13 +25,13 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     override func viewWillAppear(animated: Bool) {
-        //人気のボタンを選択状態にする
-        tapTabButton(tabButtons[0])
-        
-        //menus = []
-        //getMenus(IdforUrl[0])
+        menus = []
         tableView.dataSource = self
         tableView.delegate = self
+        
+        //人気のボタンを選択状態にする
+        tapTabButton(tabButtons[0])
+        self.tableView.reloadData()
     }
 
     //APIから情報取得
@@ -45,21 +45,12 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 let json = JSON(object)
                 json["result"].forEach{(i, json) in
                     let menu: [String: String?] = [
-//                        "id": json["recipeId"].string,
                         "title": json["recipeTitle"].string,
                         "recipeUrl": json["recipeUrl"].string,
                         "foodimageurl": json["foodImageUrl"].string,
-//                        "mediumimageurl": json["mediumImageUrl"].string,
-//                        "smallimageurl": json["smallImageUrl"].string,
-//                        "pickup": json["pickup"].string,
-//                        "shop": json["shop"].string,
-//                        "nickname": json["nickname"].string,
                         "description": json["recipeDescription"].string,
-//                        "material": json["recipeMaterial"].string,
                         "time": json["recipeIndication"].string,
                         "cost": json["recipeCost"].string,
-//                        "publishday": json["recipePublishday"].string,
-//                        "rank": json["rank"].string
                         ]
                         self.menus.append(menu)
                         }
@@ -158,6 +149,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tapTabButton(sender: UIButton){
+        print("Start \(menus.count)")
         menus = []
         let i = sender.tag
         getMenus(IdforUrl[i])
@@ -169,6 +161,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 setSelectedButton(tabButtons[j], selected: false)
                 }
             }
+        print("End \(menus.count)")
     }
 //
     

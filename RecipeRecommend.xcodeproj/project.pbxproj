@@ -60,6 +60,7 @@
 		8CCFADD71C70FBC000D8A954 /* GetCategoryMemo in Resources */ = {isa = PBXBuildFile; fileRef = 8CCFADD61C70FBC000D8A954 /* GetCategoryMemo */; };
 		8CE5F5561C6B1E8C00571BD2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE5F5551C6B1E8C00571BD2 /* LoginViewController.swift */; };
 		8CE5F5581C6B28A700571BD2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE5F5571C6B28A700571BD2 /* User.swift */; };
+		8CF0FB671C817B8F00CFEFA4 /* CheckReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF0FB661C817B8F00CFEFA4 /* CheckReachability.swift */; };
 		8CF39EB31C739B4900617EC4 /* starbig.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CF39EAF1C739B4900617EC4 /* starbig.png */; };
 		8CF39EB41C739B4900617EC4 /* starbigchange.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CF39EB01C739B4900617EC4 /* starbigchange.png */; };
 		8CF39EB51C739B4900617EC4 /* starsmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CF39EB11C739B4900617EC4 /* starsmall.png */; };
@@ -148,6 +149,7 @@
 		8CCFADD61C70FBC000D8A954 /* GetCategoryMemo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GetCategoryMemo; sourceTree = "<group>"; };
 		8CE5F5551C6B1E8C00571BD2 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8CE5F5571C6B28A700571BD2 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		8CF0FB661C817B8F00CFEFA4 /* CheckReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckReachability.swift; sourceTree = "<group>"; };
 		8CF39EAF1C739B4900617EC4 /* starbig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = starbig.png; sourceTree = "<group>"; };
 		8CF39EB01C739B4900617EC4 /* starbigchange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = starbigchange.png; sourceTree = "<group>"; };
 		8CF39EB11C739B4900617EC4 /* starsmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = starsmall.png; sourceTree = "<group>"; };
@@ -254,28 +256,15 @@
 			isa = PBXGroup;
 			children = (
 				8CC0144E1C69F8F200A76140 /* Model */,
-				8CC0144D1C69F8E500A76140 /* ViewController */,
+				8CC0144D1C69F8E500A76140 /* View */,
+				8CF0FB651C817B2F00CFEFA4 /* Controller */,
 				8C2EA3761C6868EB0079533C /* AppDelegate.swift */,
 				8C2EA37A1C6868EB0079533C /* Main.storyboard */,
 				8C2EA37D1C6868EB0079533C /* Assets.xcassets */,
 				8C2EA37F1C6868EB0079533C /* LaunchScreen.storyboard */,
 				8C2EA3821C6868EB0079533C /* Info.plist */,
-				8C7959EC1C79A0EA0024F733 /* PaPad.png */,
-				8CF39EAF1C739B4900617EC4 /* starbig.png */,
-				8CF39EB01C739B4900617EC4 /* starbigchange.png */,
-				8CF39EB11C739B4900617EC4 /* starsmall.png */,
-				8CF39EB21C739B4900617EC4 /* starsmallchange.png */,
-				8CFE05531C75B23200CEC1F4 /* Logout.png */,
-				8CFE05541C75B23200CEC1F4 /* Logoutsmall.png */,
-				8CB9F1541C76CAD800E212FA /* 58.png */,
-				8CB9F1551C76CAD800E212FA /* 80.png */,
-				8CB9F1561C76CAD800E212FA /* 87.png */,
-				8CB9F1571C76CAD800E212FA /* 120.png */,
-				8CB9F1581C76CAD800E212FA /* 180.png */,
-				8CCFADD61C70FBC000D8A954 /* GetCategoryMemo */,
-				8CC434031C71FE71007C28AC /* SearchMemo */,
-				8CB9F15E1C76CEEB00E212FA /* memo_MenuView */,
-				8CCFADC11C70D9B600D8A954 /* 壁紙 */,
+				8CF0FB681C817BBC00CFEFA4 /* Pictures */,
+				8CF0FB691C817BE300CFEFA4 /* Memo */,
 			);
 			path = RecipeRecommend;
 			sourceTree = "<group>";
@@ -298,20 +287,17 @@
 			path = RecipeRecommendUITests;
 			sourceTree = "<group>";
 		};
-		8CC0144D1C69F8E500A76140 /* ViewController */ = {
+		8CC0144D1C69F8E500A76140 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				8CE5F5551C6B1E8C00571BD2 /* LoginViewController.swift */,
 				8C2EA3A61C686C3B0079533C /* MenuViewController.swift */,
 				8C1E06421C6CEDCE0043B0F6 /* MenuWebViewController.swift */,
 				8C1E064A1C6EC6970043B0F6 /* FavoriteTableViewController.swift */,
-				8C78DFD11C7039A0002297C7 /* NavigationBarController.swift */,
-				8C78DFD31C704393002297C7 /* TabBarController.swift */,
-				8C78DFD51C708B3E002297C7 /* LaunchViewController.swift */,
 				8CCFADD21C70E13A00D8A954 /* SearchTableViewController.swift */,
 				8C2CC7361C730F900010B2EB /* SearchResultsViewController.swift */,
 			);
-			name = ViewController;
+			name = View;
 			sourceTree = "<group>";
 		};
 		8CC0144E1C69F8F200A76140 /* Model */ = {
@@ -338,6 +324,47 @@
 				8CCFADC91C70D9B600D8A954 /* 8.jpg */,
 			);
 			path = "壁紙";
+			sourceTree = "<group>";
+		};
+		8CF0FB651C817B2F00CFEFA4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8C78DFD11C7039A0002297C7 /* NavigationBarController.swift */,
+				8C78DFD51C708B3E002297C7 /* LaunchViewController.swift */,
+				8C78DFD31C704393002297C7 /* TabBarController.swift */,
+				8CF0FB661C817B8F00CFEFA4 /* CheckReachability.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		8CF0FB681C817BBC00CFEFA4 /* Pictures */ = {
+			isa = PBXGroup;
+			children = (
+				8C7959EC1C79A0EA0024F733 /* PaPad.png */,
+				8CF39EAF1C739B4900617EC4 /* starbig.png */,
+				8CF39EB01C739B4900617EC4 /* starbigchange.png */,
+				8CF39EB11C739B4900617EC4 /* starsmall.png */,
+				8CF39EB21C739B4900617EC4 /* starsmallchange.png */,
+				8CFE05531C75B23200CEC1F4 /* Logout.png */,
+				8CFE05541C75B23200CEC1F4 /* Logoutsmall.png */,
+				8CB9F1541C76CAD800E212FA /* 58.png */,
+				8CB9F1551C76CAD800E212FA /* 80.png */,
+				8CB9F1561C76CAD800E212FA /* 87.png */,
+				8CB9F1571C76CAD800E212FA /* 120.png */,
+				8CB9F1581C76CAD800E212FA /* 180.png */,
+				8CCFADC11C70D9B600D8A954 /* 壁紙 */,
+			);
+			name = Pictures;
+			sourceTree = "<group>";
+		};
+		8CF0FB691C817BE300CFEFA4 /* Memo */ = {
+			isa = PBXGroup;
+			children = (
+				8CCFADD61C70FBC000D8A954 /* GetCategoryMemo */,
+				8CC434031C71FE71007C28AC /* SearchMemo */,
+				8CB9F15E1C76CEEB00E212FA /* memo_MenuView */,
+			);
+			name = Memo;
 			sourceTree = "<group>";
 		};
 		C06475259EC11AABE1402AFF /* Pods */ = {
@@ -573,6 +600,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CCD67C91C719FD90032667B /* Search.swift in Sources */,
+				8CF0FB671C817B8F00CFEFA4 /* CheckReachability.swift in Sources */,
 				8CE5F5561C6B1E8C00571BD2 /* LoginViewController.swift in Sources */,
 				8C78DFD61C708B3E002297C7 /* LaunchViewController.swift in Sources */,
 				8CC014501C69F92600A76140 /* MenuManager.swift in Sources */,

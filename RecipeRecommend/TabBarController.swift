@@ -32,8 +32,8 @@ class TabBarController: UITabBarController,UITabBarControllerDelegate{
     }
 
     func consent() {
-        let alertController = UIAlertController(title: "お気に入り機能を使用するにはユーザー登録が必要です。\n登録が可能な場合は、「ユーザー登録」へ進んで下さい。", message: "", preferredStyle: .Alert)
-        let signUpAction = UIAlertAction(title: "ユーザー登録", style: .Default,
+        let alertController = UIAlertController(title: "お気に入り機能を使用するにはユーザーログインが必要です。", message: "", preferredStyle: .Alert)
+        let signUpAction = UIAlertAction(title: "ユーザー登録/ログイン", style: .Default,
             handler:{ (action:UIAlertAction!) -> Void in
                 self.viewWillAppear(true)
                 self.execution()

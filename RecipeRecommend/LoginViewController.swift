@@ -7,6 +7,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var SignUpButton: UIButton!
     @IBOutlet weak var Cancel: UIButton!
     var TABControl = TabBarController()
+    var Flag = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,9 +59,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     self.showNotice("ユーザーが登録されました")
                     self.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
                     self.TABControl.viewWillAppear(false)
-                    }
                 }
-            }
+        }
+    }
     
     @IBAction func tapLoginButton(sender: AnyObject) {
         let user = User(name: nameTextField.text!, password: passwordTextField.text!)

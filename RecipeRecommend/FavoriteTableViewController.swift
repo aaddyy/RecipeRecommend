@@ -141,7 +141,7 @@ class FavoriteTableViewController: UIViewController,  UITableViewDataSource,  UI
     }
     
     func logout() {
-        let alertController = UIAlertController(title: "ログアウトしますか？", message: "", preferredStyle: .Alert)
+        let alertController = UIAlertController(title: "ログアウトしますか？", message: "あなたのアカウント情報\nユーザー名：\(PFUser.currentUser()!.username!)", preferredStyle: .Alert)
         let logoutAction = UIAlertAction(title: "ログアウト", style: .Default,
             handler:{ (action:UIAlertAction!) -> Void in
                 self.execution()
