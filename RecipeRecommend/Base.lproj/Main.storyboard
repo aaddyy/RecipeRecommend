@@ -333,7 +333,7 @@
         <scene sceneID="sEd-li-diL">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EHR-mI-kmR" customClass="NavigationBarController" customModule="PaPad" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="3" systemItem="favorites" id="Z0S-EV-8Ab"/>
+                    <tabBarItem key="tabBarItem" tag="3" systemItem="bookmarks" id="Z0S-EV-8Ab"/>
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="xo6-Pi-Cz9">
@@ -734,7 +734,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="opf-xr-Qmn"/>
+        <segue reference="OYn-o7-h1a"/>
         <segue reference="eJ9-eX-zXP"/>
     </inferredMetricsTieBreakers>
 </document>

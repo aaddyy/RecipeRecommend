@@ -39,7 +39,7 @@ class MenuWebViewController: UIViewController, UIScrollViewDelegate, WKNavigatio
 //お気に入りボタンの設定
     func favoriteButtonSetting(){
             if flag != 1{
-                var deviceOrientation: UIDeviceOrientation!  = UIDevice.currentDevice().orientation
+                let deviceOrientation: UIDeviceOrientation!  = UIDevice.currentDevice().orientation
                         if UIDeviceOrientationIsLandscape(deviceOrientation) {
                             tempOrientation = Landscape
                  } else if UIDeviceOrientationIsPortrait(deviceOrientation){
@@ -57,16 +57,16 @@ class MenuWebViewController: UIViewController, UIScrollViewDelegate, WKNavigatio
     func onOrientationChange(notification: NSNotification){
         
         // 現在のデバイスの向きを取得.
-        var deviceOrientation: UIDeviceOrientation!  = UIDevice.currentDevice().orientation
+        let deviceOrientation: UIDeviceOrientation!  = UIDevice.currentDevice().orientation
         
         // 向きの判定.
         if UIDeviceOrientationIsLandscape(deviceOrientation) {
             //横向きの判定
-            var FavoriteButton = UIBarButtonItem(image: UIImage(named: Landscape), style: .Plain, target: self, action: "favorite")
+            let FavoriteButton = UIBarButtonItem(image: UIImage(named: Landscape), style: .Plain, target: self, action: "favorite")
             navigationItem.rightBarButtonItem = FavoriteButton
         } else if UIDeviceOrientationIsPortrait(deviceOrientation){
             //縦向きの判定
-            var FavoriteButton = UIBarButtonItem(image: UIImage(named: Portrait), style: .Plain, target: self, action: "favorite")
+            let FavoriteButton = UIBarButtonItem(image: UIImage(named: Portrait), style: .Plain, target: self, action: "favorite")
             navigationItem.rightBarButtonItem = FavoriteButton
         }
     }
@@ -83,14 +83,14 @@ class MenuWebViewController: UIViewController, UIScrollViewDelegate, WKNavigatio
             self.favoriteButtonSetting()
             self.showAlert("お気に入りに登録されました")
             // 向きの判定.
-            var deviceOrientation: UIDeviceOrientation!  = UIDevice.currentDevice().orientation
+            let deviceOrientation: UIDeviceOrientation!  = UIDevice.currentDevice().orientation
             if UIDeviceOrientationIsLandscape(deviceOrientation) {
                 //横向きの判定
-                var FavoriteButton = UIBarButtonItem(image: UIImage(named: "starsmallchange.png"), style: .Plain, target: self, action: "favorite")
+                let FavoriteButton = UIBarButtonItem(image: UIImage(named: "starsmallchange.png"), style: .Plain, target: self, action: "favorite")
                 navigationItem.rightBarButtonItem = FavoriteButton
             } else if UIDeviceOrientationIsPortrait(deviceOrientation){
                 //縦向きの判定
-                var FavoriteButton = UIBarButtonItem(image: UIImage(named: "starbigchange.png"), style: .Plain, target: self, action: "favorite")
+                let FavoriteButton = UIBarButtonItem(image: UIImage(named: "starbigchange.png"), style: .Plain, target: self, action: "favorite")
                 navigationItem.rightBarButtonItem = FavoriteButton
             }
         }
@@ -107,7 +107,7 @@ class MenuWebViewController: UIViewController, UIScrollViewDelegate, WKNavigatio
                 let current = PFUser.currentUser()!.objectId
                 if USER == current {
                     let exist = object["recipeUrl"] as! String
-                    let currentURL = self.Menu["recipeUrl"]!! as! String
+                    let currentURL = self.Menu["recipeUrl"]!! 
                     if exist == currentURL{
                         self.check = 1
                         self.Landscape = "starsmallchange.png"

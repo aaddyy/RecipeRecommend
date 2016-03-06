@@ -84,16 +84,14 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "Pods/AFNetworking.framework"
   install_framework "Pods/Alamofire.framework"
+  install_framework "Pods/AlamofireImage.framework"
   install_framework "Pods/MyLibrary.framework"
   install_framework "Pods/SwiftyJSON.framework"
-  install_framework "Pods/TTTAttributedLabel.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "Pods/AFNetworking.framework"
   install_framework "Pods/Alamofire.framework"
+  install_framework "Pods/AlamofireImage.framework"
   install_framework "Pods/MyLibrary.framework"
   install_framework "Pods/SwiftyJSON.framework"
-  install_framework "Pods/TTTAttributedLabel.framework"
 fi

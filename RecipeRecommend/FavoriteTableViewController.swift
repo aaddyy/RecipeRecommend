@@ -1,5 +1,6 @@
 import UIKit
 import Parse
+import AlamofireImage
 
 class FavoriteTableViewController: UIViewController,  UITableViewDataSource,  UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
@@ -87,13 +88,9 @@ class FavoriteTableViewController: UIViewController,  UITableViewDataSource,  UI
         //画像の処理
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         let url = NSURL(string: favorit["foodimageurl"]!!)
-        let req = NSURLRequest(URL:url!)
-        NSURLConnection.sendAsynchronousRequest(req, queue:NSOperationQueue.mainQueue()){(res, data, err) in
-            let image = UIImage(data:data!)
-            let menuImage = cell.viewWithTag(5) as! UIImageView
-            menuImage.image = image
+        let menuImage = cell.viewWithTag(5) as! UIImageView
+        menuImage.af_setImageWithURL(url!)
         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-        }
         return cell
     }
     
@@ -126,16 +123,16 @@ class FavoriteTableViewController: UIViewController,  UITableViewDataSource,  UI
     func onOrientationChange(notification: NSNotification){
         
         // 現在のデバイスの向きを取得.
-        var deviceOrientation: UIDeviceOrientation!  = UIDevice.currentDevice().orientation
+        let deviceOrientation: UIDeviceOrientation!  = UIDevice.currentDevice().orientation
         
         // 向きの判定.
         if UIDeviceOrientationIsLandscape(deviceOrientation) {
             //横向きの判定
-            var LogoutButton = UIBarButtonItem(image: UIImage(named: "Logoutsmall.png"), style: .Plain, target: self, action: "logout")
+            let LogoutButton = UIBarButtonItem(image: UIImage(named: "Logoutsmall.png"), style: .Plain, target: self, action: "logout")
             navigationItem.rightBarButtonItem = LogoutButton
         } else if UIDeviceOrientationIsPortrait(deviceOrientation){
             //縦向きの判定
-            var LogoutButton = UIBarButtonItem(image: UIImage(named: "Logout.png"), style: .Plain, target: self, action: "logout")
+            let LogoutButton = UIBarButtonItem(image: UIImage(named: "Logout.png"), style: .Plain, target: self, action: "logout")
             navigationItem.rightBarButtonItem = LogoutButton
         }
     }

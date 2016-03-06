@@ -27,7 +27,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     //表示する毎に表示画像を変更する
     override func viewWillAppear(animated: Bool) {
-        var temp = arc4random() % 8 + 1
+        let temp = arc4random() % 8 + 1
         backImage.image = UIImage(named: "\(temp).jpg")
     }
 

@@ -1,6 +1,7 @@
 import UIKit
 import SwiftyJSON
 import Alamofire
+import AlamofireImage
 import Parse
 
 class SearchTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchControllerDelegate {
@@ -32,7 +33,7 @@ class SearchTableViewController: UIViewController, UITableViewDelegate, UITableV
         tableView.delegate = self
         self.tableView.reloadData()
         
-        var tap = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
+        let tap = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
         self.view.addGestureRecognizer(tap)
     }
     
@@ -41,7 +42,7 @@ class SearchTableViewController: UIViewController, UITableViewDelegate, UITableV
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         //検索文字列のスペースを判別
         var tempArray:[String] = []
-        var tempText = self.searchBar.text!
+        let tempText = self.searchBar.text!
         if (tempText.rangeOfString(" ") != nil){
             tempArray = tempText.componentsSeparatedByString(" ")
         }else if (tempText.rangeOfString("　") != nil){
@@ -49,12 +50,12 @@ class SearchTableViewController: UIViewController, UITableViewDelegate, UITableV
         }else{
             tempArray.append(tempText)
         }
-        var count = tempArray.count
+        let count = tempArray.count
         //
 
-        var limit = 3
+        let limit = 3
         for(var j=0; j < limit+1; j++){
-        var queryInfo = PFQuery(className: "Category")
+        let queryInfo = PFQuery(className: "Category")
         queryInfo.limit = 1000
         queryInfo.skip = 1000*j
         queryInfo.findObjectsInBackgroundWithBlock { (objects, error) in
@@ -65,14 +66,14 @@ class SearchTableViewController: UIViewController, UITableViewDelegate, UITableV
                         var check = 0
                         
                             for (var i=0; i < count; i++){
-                                if (exist.rangeOfString(tempArray[i] as! String) != nil){
+                                if (exist.rangeOfString(tempArray[i] ) != nil){
                                     check++
                                     }
                                 }
                                 if (check == count){
-                                    var temp: [String: String?] = [
-                                        "name": object["categoryName"]! as! String,
-                                        "url": object["categoryUrl"]! as! String
+                                    let temp: [String: String?] = [
+                                        "name": object["categoryName"]! as? String,
+                                        "url": object["categoryUrl"]! as? String
                                     ]
                                     self.Category.append(temp)
                                     self.tableView.reloadData()
@@ -88,7 +89,7 @@ class SearchTableViewController: UIViewController, UITableViewDelegate, UITableV
 
 //画面遷移設定・値渡し
     override func prepareForSegue(segue: UIStoryboardSegue,  sender: AnyObject?) {
-        var cast = segue.destinationViewController
+        let cast = segue.destinationViewController
         if cast is UINavigationController{
         } else {
             let searchResults = cast as! SearchResultsViewController

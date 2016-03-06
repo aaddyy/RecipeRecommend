@@ -1,6 +1,7 @@
 import UIKit
 import SwiftyJSON
 import Alamofire
+import AlamofireImage
 import Parse
 
 class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -92,13 +93,10 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         //画像の処理
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         let url = NSURL(string: menu["foodimageurl"]!!)
-        let req = NSURLRequest(URL:url!)
-        NSURLConnection.sendAsynchronousRequest(req, queue:NSOperationQueue.mainQueue()){(res, data, err) in
-            let image = UIImage(data:data!)
-            let menuImage = cell.viewWithTag(5) as! UIImageView
-            menuImage.image = image
+        let menuImage = cell.viewWithTag(5) as! UIImageView
+        menuImage.af_setImageWithURL(url!)
         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-        }
+        
         return cell
     }
     
@@ -149,7 +147,6 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tapTabButton(sender: UIButton){
-        print("Start \(menus.count)")
         menus = []
         let i = sender.tag
         getMenus(IdforUrl[i])
@@ -161,7 +158,6 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 setSelectedButton(tabButtons[j], selected: false)
                 }
             }
-        print("End \(menus.count)")
     }
 //
     
